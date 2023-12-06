@@ -1,20 +1,45 @@
 {
-  "name": "nextjs-app-router-demo",
-  "version": "0.1.0",
-  "private": true,
+	"name": "nextjs-app-router-demo",
+	"version": "0.1.0",
+	"private": true,
+	"dependencies": {
+		"react": "^18",
+		"react-dom": "^18",
+		"next": "14.0.3"
+	},
+	"devDependencies": {
+		"@next/bundle-analyzer": "^14.0.3",
+		"env-cmd": "^10.1.0",
+		"eslint": "^8.54.0",
+		"eslint-config-next": "^14.0.3",
+		"eslint-plugin-import": "^2.29.0",
+		"eslint-plugin-react": "^7.33.2",
+		"eslint-plugin-unicorn": "^49.0.0",
+		"eslint-plugin-unused-imports": "^3.0.0",
+		"husky": "^8.0.3",
+		"local-ssl-proxy": "^2.0.5",
+		"prettier": "^3.1.0",
+		"yarn-upgrade-all": "^0.7.2"
+	},
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
-  },
-  "dependencies": {
-    "react": "^18",
-    "react-dom": "^18",
-    "next": "14.0.3"
-  },
-  "devDependencies": {
-    "eslint": "^8",
-    "eslint-config-next": "14.0.3"
-  }
+		"dev": "npx env-cmd -x -f ./.env.local next dev -p '$PORT'",
+		"build": "next build",
+		"start": "npx env-cmd -x -f ./.env.local next start -p '$PORT'",
+		"lint": "next lint",
+		"prettier-all": "yarn prettier --config .prettierrc --write ./src",
+		"fix": "yarn eslint --fix ./src --ext .js --ext .jsx",
+		"dependencies-upgrade": "yarn yarn-upgrade-all",
+		"generate-build-hash": "echo '{\"version\": \"'$(git rev-parse --short HEAD)'\"}' > sha.json",
+		"analyze": "ANALYZE=true next build"
+	},
+  "yarn-upgrade-all": {
+		"ignore": [
+			"react",
+			"next",
+			"react-dom",
+			"antd",
+			"next-connect",
+			"iron-session"
+		]
+	}
 }
